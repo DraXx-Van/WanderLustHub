@@ -18,6 +18,17 @@ module.exports.editListingForm = async (req,res) => {
 module.exports.createListing = async (req,res) => {
     const listing = req.body.listing;
     listing.owner = req.user._id;
+
+    if(!req.file){
+        req.session.error = "Image is Required";
+        return res.redirect("/listings/new");
+    }
+    
+    listing.image = {
+        url : req.file.path,
+        filename: req.file.filename
+    };
+    res.send(listing);
     await Listing.create(listing);
     req.session.success = "Listing Created Successfully";
     res.redirect("/listings");
