@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <img class="mx-auto h-auto sm:max-w-full md:max-w-md lg:max-w-lg rounded-base" src="<%= listing.image %>"
+            alt="image description">
+        <section class="flex md:flex-row px-15 py-10 justify-between flex-col">
+            <div class="flex-1">
+                <h3 class="text-2xl font-semibold text-black/85">
+                    <%= listing.title %>
+                </h3>
+                <h4 class="text-black/70">
+                    <%= listing.location %>,<%= listing.country %>
+                </h4>
+
+                <div class="border-t border-black/11 my-5 max-w-[90%]"></div>
+
+                <div class="mt-5 text-md mr-50">
+                    <h3 class="text-2xl font-semibold text-black/65 mb-5">About this stay</h3>
+                    <%= listing.description %>
+                </div>
+
+                <hr class="my-8 border-black/12 max-w-[90%]">
+
+                <div class="flex items-center gap-3 mb-8">
+                    <div
+                        class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-semibold">
+                        <%= listing.owner.username.charAt(0).toUpperCase() %>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-body">Hosted by</p>
+                        <h4 class="font-semibold text-heading">
+                            <%= listing.owner.username %>
+                        </h4>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mt-5 text-black/65 mb-4">Leave a review :</h3>
+                    <form class="max-w-md flex flex-col gap-4" method="post"
+                        action="/listings/<%= listing.id %>/reviews">
+                        <div>
+                            <label for="rating" class="block mb-2.5 text-sm font-medium text-heading">Rating</label>
+                            <input id="rating" name="review[rating]" type="range" min="1" max="5" value="3"
+                                class="w-full h-2 bg-neutral-quaternary rounded-full appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                            <label for="comment" class="label">Comment</label>
+                            <textarea name="review[comment]" id="comment" rows="4" class="longinput"
+                                placeholder="Enter your comment here..." required></textarea>
+                        </div>
+                        <div>
+                            <% if(currUser) { %>
+                                <button type="submit" class="button-primary">
+                                    Add Review
+                                </button>
+                                <% } else { %>
+                                    <a href="/login" class="button-primary">
+                                        Login to Review
+                                    </a>
+                                    <% } %>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="w-[320px]">
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 border sticky top-24 border-default rounded-base shadow-md">
+                    <h5 class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8">&#8377; <%=
+                            listing.price.toLocaleString("en-IN")%>/Night</h5>
+                    <p class="text-body">
+                        <%= listing.title %>
+                    </p>
+                    <h4 class="text-black/70">
+                        <%= listing.location %>,<%= listing.country %>
+                    </h4>
+
+                    <p class="text-sm text-body mt-1 mb-4">
+                        Hosted by
+                        <span class="font-semibold text-heading">
+                            <%= listing.owner.username %>
+                        </span>
+                    </p>
+
+                    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+                        <a href="/listings/<%= listing.id %>/edit" class="button-primary mr-5">
+                            Edit
+                            <i class="ml-2.5 ri-edit-2-line"></i>
+                        </a>
+
+                        <form class="inline" action="/listings/<%= listing.id %>?_method=DELETE" method="post">
+                            <button class="button-red">
+                                Delete
+                                <i class="ml-2.5 ri-delete-bin-6-line"></i>
+                            </button>
+                        </form>
+                        <% } %>
+                </div>
+            </div>
+        </section>
+
+        <div class="mx-10 border solid border-black/10 my-3"></div>
+
+        <!-- Review Section  -->
+
+        <section class="px-15 py-10 grid grid-cols-1 space-x-0 space-y-7 md:grid-cols-2 md:space-x-20 ">
+            <% for(review of listing.reviews) {%>
+                <article class="">
+                    <div class="flex items-center mb-4 gap-2">
+                        <div
+                            class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-semibold">
+                            <%= review.author.username.charAt(0).toUpperCase() %>
+                        </div>
+                        <div class="font-medium text-heading">
+                            <p>
+                                <%= review.author.username %> <time datetime="2014-08-16 19:00"
+                                        class="block text-sm text-body">
+                                        Guest Review • <%= review.createdAt.toLocaleDateString('en-us', { month : "long"
+                                            , year: "numeric" , }) %></time>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                        <% for(let i=0; i < review.rating ;i++) { %>
+
+                            <i class="text-xl text-fg-yellow ri-star-fill"></i>
+                            <% } %>
+                                <h3 class="ms-2 text-sm text-gray-500"> </h3>
+                    </div>
+                    <p class="mb-2 text-body">
+                        <%= review.comment %>
+                    </p>
+
+                    <% if(currUser && currUser._id.equals(review.author._id)) { %>
+
+                        <form action="/listings/<%= listing.id %>/reviews/<%= review.id %>?_method=DELETE"
+                            method="post">
+                            <button
+                                class="underline font-semibold leading-1 tracking-wide text-red-500 cursor-pointer">Delete</button>
+                        </form>
+
+                        <% } %>
+                            <!-- <a href="#" class="block mb-5 text-sm font-medium text-fg-brand hover:underline">Read more</a> -->
+                </article>
+                <% } %>
+        </section>
+
+    </body>

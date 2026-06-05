@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust</title>
+
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
+
+<body class="font-[Poppins]">
+
+    <%- include("../includes/navbar.ejs") %>
+    <div class="container mx-auto p-4 pt-6">
+        <%- include("../includes/toast.ejs") %>
+        <%- body %>
+    </div>
+    
+    <%- include("../includes/footer.ejs") %>
+
+    <script src="/flowbite/dist/flowbite.min.js"></script>
+</body>
+</html>

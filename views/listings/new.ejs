@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate") %>
+<body class="mx-auto">
+
+    <!-- <h3>Create New Listing</h3>
+    <form action="/listings" method="post">
+        <input type="text" placeholder="Title" name="title"> <br> <br>
+        <textarea type="text" placeholder="description" name="description"></textarea> <br> <br>
+        <input type="text" placeholder="Enter image url" name="image"> <br> <br>
+        <input type="number" placeholder="price" name="price"> <br> <br>
+        <input type="text" placeholder="location" name="location"> <br> <br>
+        <input type="text" placeholder="Country" name="country"> <br><br>
+
+        <button>Create Listing</button>
+    </form> -->
+    
+    <form action="/listings" method="post" class="max-w-xl mx-auto flex flex-col gap-2" enctype="multipart/form-data">
+        <h3 class="text-3xl font-bold text-heading">Create New Listing</h3>
+        <div>
+            <label for="title" class="label">Title</label>
+            <input name="listing[title]" type="text" id="title" placeholder="Enter a catchy title" class="input" required />
+        </div>
+
+        <div>
+            <label for="description" class="label">Description</label>
+            <textarea name="listing[description]" id="description" rows="4" class="longinput" placeholder="Enter description here..."></textarea>
+        </div>
+
+        <!-- <div>
+            <label for="image" class="label">Image Link</label>
+            <input type="text" id="image" placeholder="Enter image url/link" class="input" />
+        </div> -->
+
+        <div>  
+            <label class="block mb-2.5 text-sm font-medium text-heading" for="file_input">Upload Image</label>
+            <input name="listing[image]" class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" id="file_input" type="file">
+        </div>
+
+        <div class="flex flex-row gap-3">
+            <div class="flex-1">
+                <label for="price" class="label">Price</label>
+                <input name="listing[price]" type="text" id="price" class="input" placeholder="4000" required />
+            </div>
+            <div class="flex-1">
+                <label for="country" class="label">Country</label>
+                <input name="listing[country]" type="text" id="country" placeholder="Enter country" class="input" required />
+            </div>
+        </div>
+
+        <div>
+            <label for="location" class="label">Location</label>
+            <input name="listing[location]" type="text" id="location" class="input" placeholder="Karjat,Navi Mumbai" required />
+        </div>
+        <div>
+            <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none mt-2">Add Listing</button>
+        </div>
+        
+    </form>
+
+</body>

@@ -1,0 +1,22 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <% for(let listing of listings) { %>
+            <div class="bg-neutral-primary-soft max-w-sm rounded-base overflow-hidden">
+                <a href="/listings/<%= listing.id%>" class="group block relative overflow-hidden rounded-2xl">
+                    <img class="rounded-2xl h-60 w-full object-cover transition duration-500 group-hover:scale-105 " src="<%= listing.image %>" alt="" />
+                    <div class="absolute inset-0 bg-black/20 opacity-0  group-hover:opacity-100  transition duration-500"></div>
+                </a>
+
+                <div class="px-0.5">
+                    <a href="/listings/<%= listing.id%>">
+                    <h5 class="mt-2 text-md font-semibold tracking-tight text-heading"><%= listing.title %></h5>
+                    </a>
+                    <p class="mb-6 text-body">&#8377; <%= listing.price.toLocaleString("en-IN") %>/Night</p>
+                </div>
+                
+            </div>
+        <% } %>
+    </div>
+</body>

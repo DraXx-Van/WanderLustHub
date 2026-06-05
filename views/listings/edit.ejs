@@ -1,0 +1,52 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <!-- 
+        more better way of naming is name = Listing[title]  
+        creates a listing object in req.body and inside that obj title as key : val
+        req.body = {
+            listing : {
+                title : Paradise,
+                ...
+            }
+        }
+        Thia is industry prefred and usefull in big applications
+    -->
+    
+    <form method="POST" action="/listings/<%= listing.id%>?_method=PUT" class="max-w-xl mx-auto flex flex-col gap-2">
+        <h3 class="text-3xl font-bold text-heading">Edit Your Listing</h3>
+        <div>
+            <label for="title" class="label">Title</label>
+            <input name="listing[title]" value ="<%= listing.title %>" type="text" id="title" placeholder="Enter a catchy title" class="input" required />
+        </div>
+
+        <div>
+            <label for="description" class="block mb-2.5 text-sm font-medium text-heading">Description</label>
+            <textarea name="listing[description]" id="description" rows="4" class="longinput" placeholder="Enter description here..."><%= listing.description %></textarea>
+        </div>
+
+        <div>
+            <label for="image" class="label">Image Link</label>
+            <input name="listing[image]" value ="<%= listing.image %>" type="text" id="image" placeholder="Enter image url/link" class="input" />
+        </div>
+
+        <div class="flex flex-row gap-3">
+            <div class="flex-1">
+                <label for="price" class="label">Price</label>
+                <input name="listing[price]" value ="<%= listing.price %>" type="text" id="price" class="input" placeholder="4000" required />
+            </div>
+            <div class="flex-1">
+                <label for="country" class="label">Country</label>
+                <input name="listing[country]" value ="<%= listing.country %>" type="text" id="country" placeholder="Enter country" class="input" required />
+            </div>
+        </div>
+
+        <div>
+            <label for="location" class="label">Location</label>
+            <input name="listing[location]" value ="<%= listing.location %>" type="text" id="location" class="input" placeholder="Karjat,Navi Mumbai" required />
+        </div>
+        <div>
+            <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs tracking-wider font-medium leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none mt-2">Edit</button>
+        </div>
+    </form>
+
+</body>

@@ -1,0 +1,94 @@
+<% if (success) { %>
+<div id="toast-simple"
+    class="mx-auto mb-4 flex items-center w-full max-w-sm p-4
+    bg-emerald-50 border border-emerald-200 rounded-xl shadow-md"
+    role="alert">
+
+    <svg class="w-5 h-5 text-emerald-600"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m12 18-7 3 7-18 7 18-7-3Zm0 0v-5"/>
+    </svg>
+
+    <div class="ms-3 text-sm text-emerald-800 border-s border-emerald-200 ps-3">
+        <%= success %>
+    </div>
+
+    <button type="button"
+        class="ms-auto flex items-center justify-center
+        text-emerald-500 hover:text-emerald-700
+        hover:bg-emerald-100 rounded-lg h-8 w-8 transition"
+        data-dismiss-target="#toast-simple"
+        aria-label="Close">
+
+        <span class="sr-only">Close</span>
+
+        <svg class="w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24">
+            <path stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+
+    </button>
+</div>
+<% } %>
+
+
+<% if (error) { %>
+<div id="toast-error"
+    class="mx-auto mb-4 flex items-center w-full max-w-sm p-4
+    bg-red-50 border border-red-200 rounded-xl shadow-md"
+    role="alert">
+
+    <svg class="w-5 h-5 text-red-600"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/>
+    </svg>
+
+    <div class="ms-3 text-sm text-red-800 border-s border-red-200 ps-3">
+        <%= error %>
+    </div>
+
+    <button type="button"
+        class="ms-auto flex items-center justify-center
+        text-red-500 hover:text-red-700
+        hover:bg-red-100 rounded-lg h-8 w-8 transition"
+        data-dismiss-target="#toast-error"
+        aria-label="Close">
+
+        <span class="sr-only">Close</span>
+
+        <svg class="w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24">
+            <path stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+
+    </button>
+</div>
+<% } %>
