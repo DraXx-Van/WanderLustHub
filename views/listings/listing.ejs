@@ -168,6 +168,27 @@
 
     <div class="mx-10 border solid border-black/10 my-3"></div>
 
+    
+    <section class="px-15 py-8">
+        <h3 class="text-2xl font-semibold text-black/65 mb-4">
+            Where you'll be
+        </h3>
+
+        <div class="mb-4">
+            <h4 class="text-lg font-semibold">
+                <%= listing.location %>, <%= listing.country %>
+            </h4>
+
+            <p class="text-black/60">
+                Exact location provided after booking
+            </p>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl border border-black/10 mx-10 shadow-sm">
+            <div id="map" style="height:400px;"></div>
+        </div>
+    </section>
+
     <!-- Review Section  -->
 
     <section class="px-15 py-10 grid grid-cols-1 space-x-0 space-y-7 md:grid-cols-2 md:space-x-20 ">
@@ -213,5 +234,13 @@
             </article>
             <% } %>
     </section>
+<script>
+window.locationName ="<%= listing.location %>, <%= listing.country %>";
+window.coordinates = {
+    lat: <%= listing.geometry.lat %>,
+    lng: <%= listing.geometry.lng %>
+};
+</script>
 
+<script src="/js/map.js"></script>
 </body>

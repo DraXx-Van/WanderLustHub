@@ -1,4 +1,5 @@
 const Listing = require("../models/listings");
+const { geocode } = require("../utils/geocoder");
 
 module.exports.index = async (req,res) => {
     const listings = await Listing.find();
@@ -28,6 +29,11 @@ module.exports.createListing = async (req,res) => {
         url : req.file.path,
         filename: req.file.filename
     };
+
+    const fullLocation = `${req.body.listing.location}, ${req.body.listing.country}`;
+    const coords = await geocode(fullLocation);
+    listing.geometry = coords;
+
     await Listing.create(listing);
     req.session.success = "Listing Created Successfully";
     res.redirect("/listings");
