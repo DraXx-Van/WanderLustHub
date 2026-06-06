@@ -28,7 +28,6 @@ module.exports.createListing = async (req,res) => {
         url : req.file.path,
         filename: req.file.filename
     };
-    res.send(listing);
     await Listing.create(listing);
     req.session.success = "Listing Created Successfully";
     res.redirect("/listings");
@@ -37,6 +36,13 @@ module.exports.createListing = async (req,res) => {
 module.exports.editListing = async (req,res) => { 
     const { id } = req.params;
     const listing = req.body.listing;
+    
+    if(req.file){
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        }
+    }
     await Listing.findByIdAndUpdate(id,{...listing});
     req.session.success = "Listing Updated Successfully";
     res.redirect(`/listings/${id}`);

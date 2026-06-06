@@ -1,33 +1,30 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <!-- 
-        more better way of naming is name = Listing[title]  
-        creates a listing object in req.body and inside that obj title as key : val
-        req.body = {
-            listing : {
-                title : Paradise,
-                ...
-            }
-        }
-        Thia is industry prefred and usefull in big applications
-    -->
-    
-    <form method="POST" action="/listings/<%= listing.id%>?_method=PUT" class="max-w-xl mx-auto flex flex-col gap-2">
+
+    <div class="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
+
+    <div>
+    <form method="POST" action="/listings/<%= listing.id%>?_method=PUT" class="max-w-xl mx-auto flex flex-col gap-2" enctype="multipart/form-data">
         <h3 class="text-3xl font-bold text-heading">Edit Your Listing</h3>
-        <div>
+        <div>   
             <label for="title" class="label">Title</label>
             <input name="listing[title]" value ="<%= listing.title %>" type="text" id="title" placeholder="Enter a catchy title" class="input" required />
         </div>
 
         <div>
             <label for="description" class="block mb-2.5 text-sm font-medium text-heading">Description</label>
-            <textarea name="listing[description]" id="description" rows="4" class="longinput" placeholder="Enter description here..."><%= listing.description %></textarea>
+            <textarea rows="15" name="listing[description]" id="description" rows="4" class="longinput" placeholder="Enter description here..."><%= listing.description %></textarea>
         </div>
 
-        <div>
+        <!-- <div>
             <label for="image" class="label">Image Link</label>
             <input name="listing[image]" value ="<%= listing.image %>" type="text" id="image" placeholder="Enter image url/link" class="input" />
-        </div>
+        </div> -->
+
+        <div>  
+            <label class="block mb-2.5 text-sm font-medium text-heading" for="file_input">Upload Image</label>
+            <input name="listing[image]" class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body" id="file_input" type="file">
+        </div>  
 
         <div class="flex flex-row gap-3">
             <div class="flex-1">
@@ -48,5 +45,15 @@
             <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs tracking-wider font-medium leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none mt-2">Edit</button>
         </div>
     </form>
+    </div>
+    <div class="self-start">
+        
+        <img
+            src="<%= listing.image.url %>"
+            alt=""
+            class="w-full max-w-2xl rounded-xl shadow-md sticky top-24"
+        >
+    </div>
+    </div>
 
 </body>
